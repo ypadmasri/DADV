@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NumPy Complete Guide - Interactive Examples</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #f9f9f9;
+            border-left: 5px solid #667eea;
+            border-radius: 5px;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .section h3 {
+            color: #764ba2;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        .explanation {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .code-container {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .code-label {
+            color: #4fc3f7;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        
+        .output-label {
+            color: #81c784;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+        
+        .output {
+            background: #0d1117;
+            padding: 10px;
+            border-left: 3px solid #81c784;
+            margin-top: 5px;
+        }
+        
+        .keyword { color: #569cd6; }
+        .string { color: #ce9178; }
+        .number { color: #b5cea8; }
+        .function { color: #dcdcaa; }
+        .comment { color: #6a9955; }
+        
+        .example-box {
+            background: white;
+            padding: 20px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .example-box h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .copy-btn {
+            background: #ff9800;
+            padding: 8px 15px;
+            font-size: 0.85em;
+        }
+        
+        .copy-btn:hover {
+            background: #f57c00;
+        }
+        
+        .highlight {
+            background: #fff59d;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        
+        .note {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+        
+        .note strong {
+            color: #1976d2;
+        }
+        
+        .tip {
+            background: #f3e5f5;
+            border-left: 4px solid #9c27b0;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+        
+        .tip strong {
+            color: #6a1b9a;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+        
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        table th {
+            background: #667eea;
+            color: white;
+        }
+        
+        table tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .toc {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            border: 2px solid #667eea;
+            margin-bottom: 30px;
+        }
+        
+        .toc h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .toc ol {
+            margin-left: 20px;
+        }
+        
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .toc a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+        
+        footer {
+            background: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #ddd;
+        }
+        
+        .copy-feedback {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .interactive-demo {
+            background: white;
+            padding: 20px;
+            border: 2px dashed #667eea;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        input[type="number"], input[type="text"], select {
+            padding: 10px;
+            margin: 5px 5px 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .demo-output {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 3px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 NumPy Complete Guide</h1>
+            <p>Learn NumPy with Interactive Examples and Explanations</p>
+        </header>
+        
+        <div class="content">
+            <!-- Table of Contents -->
+            <div class="toc">
+                <h3>📑 Table of Contents</h3>
+                <ol>
+                    <li><a href="#intro">Introduction to NumPy</a></li>
+                    <li><a href="#arrays">Creating Arrays</a></li>
+                    <li><a href="#operations">Basic Operations</a></li>
+                    <li><a href="#indexing">Indexing and Slicing</a></li>
+                    <li><a href="#broadcasting">Broadcasting</a></li>
+                    <li><a href="#math">Mathematical Functions</a></li>
+                    <li><a href="#reshape">Reshaping Arrays</a></li>
+                    <li><a href="#statistics">Statistics</a></li>
+                </ol>
+            </div>
+            
+            <!-- Section 1: Introduction -->
+            <div class="section" id="intro">
+                <h2>1. Introduction to NumPy</h2>
+                
+                <div class="explanation">
+                    <p><strong>NumPy</strong> is a powerful Python library for numerical computing. It provides:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>N-dimensional arrays (ndarrays)</li>
+                        <li>Mathematical operations on arrays</li>
+                        <li>Linear algebra functions</li>
+                        <li>Fourier transforms and shape manipulation</li>
+                        <li>Integration with C/C++ and Fortran code</li>
+                    </ul>
+                </div>
+                
+                <div class="code-container">
+                    <div class="code-label">Python Code: Import NumPy</div>
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+<span class="comment"># Check NumPy version</span>
+<span class="function">print</span>(np.__version__)  <span class="comment"># Output: 1.24.3 (or your version)</span>
+                </div>
+                
+                <div class="note">
+                    <strong>💡 Note:</strong> NumPy arrays are faster and more efficient than Python lists for numerical operations because they are implemented in C.
+                </div>
+            </div>
+            
+            <!-- Section 2: Creating Arrays -->
+            <div class="section" id="arrays">
+                <h2>2. Creating Arrays</h2>
+                
+                <h3>2.1 Different Ways to Create Arrays</h3>
+                
+                <div class="example-box">
+                    <h4>Example 1: From Python List</h4>
+                    <div class="code-container">
+                        <div class="code-label">Python Code</div>
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+arr = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])
+<span class="function">print</span>(arr)
+                        <div class="output-label">Output:</div>
+                        <div class="output">[1 2 3 4 5]</div>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <h4>Example 2: 2D Array (Matrix)</h4>
+                    <div class="code-container">
+                        <div class="code-label">Python Code</div>
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+arr_2d = np.array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],
+                   [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])
+<span class="function">print</span>(arr_2d)
+<span class="function">print</span>(<span class="string">"Shape:"</span>, arr_2d.shape)  <span class="comment"># (2, 3)</span>
+                        <div class="output-label">Output:</div>
+                        <div class="output">[[1 2 3]
+ [4 5 6]]
+Shape: (2, 3)</div>
+                    </div>
+                </div>
+                
+                <h3>2.2 Built-in Array Creation Functions</h3>
+                
+                <table>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td><code>np.zeros()</code></td>
+                        <td>Array filled with zeros</td>
+                        <td><code>np.zeros(3)</code> → [0. 0. 0.]</td>
+                    </tr>
+                    <tr>
+                        <td><code>np.ones()</code></td>
+                        <td>Array filled with ones</td>
+                        <td><code>np.ones(3)</code> → [1. 1. 1.]</td>
+                    </tr>
+                    <tr>
+                        <td><code>np.arange()</code></td>
+                        <td>Array with values in range</td>
+                        <td><code>np.arange(0, 10, 2)</code> → [0 2 4 6 8]</td>
+                    </tr>
+                    <tr>
+                        <td><code>np.linspace()</code></td>
+                        <td>Array with evenly spaced values</td>
+                        <td><code>np.linspace(0, 10, 5)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>np.random.rand()</code></td>
+                        <td>Random array with uniform distribution</td>
+                        <td><code>np.random.rand(3, 3)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>np.eye()</code></td>
+                        <td>Identity matrix</td>
+                        <td><code>np.eye(3)</code></td>
+                    </tr>
+                </table>
+                
+                <div class="interactive-demo">
+                    <h4>🎮 Interactive Demo: Create Arrays</h4>
+                    <label>Select array type:</label>
+                    <select id="arrayType" onchange="demoCreateArray()">
+                        <option value="zeros">Zeros</option>
+                        <option value="ones">Ones</option>
+                        <option value="arange">Arange (0-10)</option>
+                        <option value="linspace">Linspace (0-10, 5 values)</option>
+                    </select>
+                    <div class="demo-output" id="arrayOutput"></div>
+                </div>
+            </div>
+            
+            <!-- Section 3: Basic Operations -->
+            <div class="section" id="operations">
+                <h2>3. Basic Operations</h2>
+                
+                <h3>3.1 Element-wise Operations</h3>
+                
+                <div class="example-box">
+                    <h4>Example: Arithmetic Operations</h4>
+                    <div class="code-container">
+                        <div class="code-label">Python Code</div>
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+a = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])
+b = np.array([<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>])
+
+<span class="function">print</span>(<span class="string">"Addition:"</span>, a + b)
+<span class="function">print</span>(<span class="string">"Subtraction:"</span>, a - b)
+<span class="function">print</span>(<span class="string">"Multiplication:"</span>, a * b)
+<span class="function">print</span>(<span class="string">"Division:"</span>, a / b)
+<span class="function">print</span>(<span class="string">"Power:"</span>, a ** <span class="number">2</span>)
+                        <div class="output-label">Output:</div>
+                        <div class="output">Addition: [ 6  8 10 12]
+Subtraction: [-4 -4 -4 -4]
+Multiplication: [ 5 12 21 32]
+Division: [0.2 0.333... 0.428... 0.5]
+Power: [ 1  4  9 16]</div>
+                    </div>
+                </div>
+                
+                <h3>3.2 Matrix Multiplication</h3>
+                
+                <div class="code-container">
+                    <div class="code-label">Python Code</div>
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+A = np.array([[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]])
+B = np.array([[<span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>]])
+
+<span class="comment"># Matrix multiplication</span>
+<span class="function">print</span>(np.dot(A, B))
+<span class="comment"># Or use @ operator</span>
+<span class="function">print</span>(A @ B)
+                    <div class="output-label">Output:</div>
+                    <div class="output">[[19 22]
+ [43 50]]</div>
+                </div>
+                
+                <div class="tip">
+                    <strong>🎯 Tip:</strong> Use <code>np.dot()</code> or <code>@</code> operator for matrix multiplication, not <code>*</code> which does element-wise multiplication.
+                </div>
+            </div>
+            
+            <!-- Section 4: Indexing and Slicing -->
+            <div class="section" id="indexing">
+                <h2>4. Indexing and Slicing</h2>
+                
+                <div class="explanation">
+                    <p>NumPy arrays support powerful indexing and slicing operations similar to Python lists, but with more flexibility.</p>
+                </div>
+                
+                <h3>4.1 Basic Indexing</h3>
+                
+                <div class="code-container">
+                    <div class="code-label">Python Code</div>
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+arr = np.array([<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>])
+
+<span class="function">print</span>(arr[<span class="number">0</span>])      <span class="comment"># First element: 10</span>
+<span class="function">print</span>(arr[-<span class="number">1</span>])     <span class="comment"># Last element: 50</span>
+<span class="function">print</span>(arr[<span class="number">1</span>:<span class="number">4</span>])   <span class="comment"># Slice: [20 30 40]</span>
+<span class="function">print</span>(arr[::2])     <span class="comment"># Every 2nd element: [10 30 50]</span>
+                </div>
+                
+                <h3>4.2 2D Array Indexing</h3>
+                
+                <div class="code-container">
+                    <div class="code-label">Python Code</div>
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+arr_2d = np.array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],
+                   [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>],
+                   [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])
+
+<span class="function">print</span>(arr_2d[<span class="number">0</span>, <span class="number">0</span>])    <span class="comment"># Element at row 0, col 0: 1</span>
+<span class="function">print</span>(arr_2d[<span class="number">1</span>, :])     <span class="comment"># Entire row 1: [4 5 6]</span>
+<span class="function">print</span>(arr_2d[:, <span class="number">2</span>])     <span class="comment"># Entire column 2: [3 6 9]</span>
+<span class="function">print</span>(arr_2d[<span class="number">0</span>:<span class="number">2</span>, <span class="number">1</span>:<span class="number">3</span>])  <span class="comment"># Submatrix</span>
+                    <div class="output-label">Output:</div>
+                    <div class="output">1
+[4 5 6]
+[3 6 9]
+[[2 3]
+ [5 6]]</div>
+                </div>
+                
+                <h3>4.3 Boolean Indexing</h3>
+                
+                <div class="code-container">
+                    <div class="code-label">Python Code</div>
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+arr = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])
+
+<span class="comment"># Get elements greater than 3</span>
+mask = arr > <span class="number">3</span>
+<span class="function">print</span>(arr[mask])  <span class="comment"># [4 5]</span>
+
+<span class="comment"># One-liner</span>
+<span class="function">print</span>(arr[arr > <span class="number">3</span>])  <span class="comment"># [4 5]</span>
+                </div>
+            </div>
+            
+            <!-- Section 5: Broadcasting -->
+            <div class="section" id="broadcasting">
+                <h2>5. Broadcasting</h2>
+                
+                <div class="explanation">
+                    <p><strong>Broadcasting</strong> allows NumPy to perform operations on arrays of different shapes. It's a powerful feature that makes your code more concise and faster.</p>
+                </div>
+                
+                <h3>5.1 Broadcasting Rules</h3>
+                <ol style="margin-left: 20px; margin-top: 10px;">
+                    <li>If arrays have different dimensions, pad the smaller one with dimensions of size 1</li>
+                    <li>Arrays are compatible if dimensions are equal or one of them is 1</li>
+                    <li>The dimension with size 1 is stretched to match the other</li>
+                </ol>
+                
+                <h3>5.2 Broadcasting Examples</h3>
+                
+                <div class="code-container">
+                    <div class="code-label">Python Code</div>
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+<span class="comment"># 1D array + scalar (broadcasting)</span>
+arr = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])
+<span class="function">print</span>(arr + <span class="number">5</span>)  <span class="comment"># [6 7 8]</span>
+
+<span class="comment"># 2D array + 1D array</span>
+arr_2d = np.array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],
+                   [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])
+arr_1d = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])
+
+<span class="function">print</span>(arr_2d + arr_1d)
+                    <div class="output-label">Output:</div>
+                    <div class="output">[[2 4 6]
+ [5 7 9]]</div>
+                </div>
+                
+                <div class="note">
+                    <strong>💡 Note:</strong> Broadcasting avoids making unnecessary copies of data, which saves memory and makes code faster!
+                </div>
+            </div>
+            
+            <!-- Section 6: Mathematical Functions -->
+            <div class="section" id="math">
+                <h2>6. Mathematical Functions</h2>
+                
+                <h3>6.1 Common Mathematical Functions</h3>
+                
+                <table>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td><code>np.sqrt()</code></td>
+                        <td>Square root</td>
+                        <td><code>np.sqrt(16)</code> → 4.0</td>
+                    </tr>
+                    <tr>
+                        <td><code>np.exp()</code></td>
+                        <td>Exponential (e^x)</td>
+                        <td><code>np.exp(1)</code> → 2.718...</td>
+                    </tr>
+                    <tr>
+                        <td><code>np.log()</code></td>
+                        <td>Natural logarithm</td>
+                        <td><code>np.log(np.e)</code> → 1.0</td>
+                    </tr>
+                    <tr>
+                        <td><code>np.sin(), np.cos(), np.tan()</code></td>
+                        <td>Trigonometric functions</td>
+                        <td><code>np.sin(np.pi/2)</code> → 1.0</td>
+                    </tr>
+                    <tr>
+                        <td><code>np.abs()</code></td>
+                        <td>Absolute value</td>
+                        <td><code>np.abs(-5)</code> → 5</td>
+                    </tr>
+                    <tr>
+                        <td><code>np.ceil(), np.floor()</code></td>
+                        <td>Round up/down</td>
+                        <td><code>np.ceil(4.3)</code> → 5.0</td>
+                    </tr>
+                </table>
+                
+                <div class="example-box">
+                    <h4>Example: Mathematical Operations on Array</h4>
+                    <div class="code-container">
+                        <div class="code-label">Python Code</div>
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+arr = np.array([<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>])
+
+<span class="function">print</span>(<span class="string">"Square root:"</span>, np.sqrt(arr))
+<span class="function">print</span>(<span class="string">"Exponential:"</span>, np.exp(arr))
+<span class="function">print</span>(<span class="string">"Log:"</span>, np.log(arr))
+                        <div class="output-label">Output:</div>
+                        <div class="output">Square root: [1. 2. 3. 4.]
+Exponential: [2.71828183e+00  5.45981500e+01  ...]
+Log: [0.         1.38629436  2.19722458  2.77258872]</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 7: Reshaping -->
+            <div class="section" id="reshape">
+                <h2>7. Reshaping Arrays</h2>
+                
+                <div class="explanation">
+                    <p>You can change the shape of an array without changing its data using reshaping functions.</p>
+                </div>
+                
+                <h3>7.1 Reshape Method</h3>
+                
+                <div class="code-container">
+                    <div class="code-label">Python Code</div>
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+arr = np.arange(<span class="number">12</span>)  <span class="comment"># [0 1 2 ... 11]</span>
+
+<span class="comment"># Reshape to 3x4 matrix</span>
+reshaped = arr.reshape(<span class="number">3</span>, <span class="number">4</span>)
+<span class="function">print</span>(reshaped)
+<span class="function">print</span>(<span class="string">"Shape:"</span>, reshaped.shape)
+                    <div class="output-label">Output:</div>
+                    <div class="output">[[ 0  1  2  3]
+ [ 4  5  6  7]
+ [ 8  9 10 11]]
+Shape: (3, 4)</div>
+                </div>
+                
+                <h3>7.2 Flatten and Ravel</h3>
+                
+                <div class="code-container">
+                    <div class="code-label">Python Code</div>
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+arr_2d = np.array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],
+                   [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])
+
+<span class="comment"># Flatten to 1D array</span>
+flattened = arr_2d.flatten()
+<span class="function">print</span>(flattened)  <span class="comment"># [1 2 3 4 5 6]</span>
+
+<span class="comment"># Transpose</span>
+<span class="function">print</span>(arr_2d.T)
+                    <div class="output-label">Output:</div>
+                    <div class="output">[1 2 3 4 5 6]
+[[1 4]
+ [2 5]
+ [3 6]]</div>
+                </div>
+            </div>
+            
+            <!-- Section 8: Statistics -->
+            <div class="section" id="statistics">
+                <h2>8. Statistical Functions</h2>
+                
+                <table>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><code>np.mean()</code></td>
+                        <td>Average of array elements</td>
+                    </tr>
+                    <tr>
+                        <td><code>np.median()</code></td>
+                        <td>Median value</td>
+                    </tr>
+                    <tr>
+                        <td><code>np.std()</code></td>
+                        <td>Standard deviation</td>
+                    </tr>
+                    <tr>
+                        <td><code>np.var()</code></td>
+                        <td>Variance</td>
+                    </tr>
+                    <tr>
+                        <td><code>np.min(), np.max()</code></td>
+                        <td>Minimum and maximum values</td>
+                    </tr>
+                    <tr>
+                        <td><code>np.sum(), np.prod()</code></td>
+                        <td>Sum and product of elements</td>
+                    </tr>
+                    <tr>
+                        <td><code>np.cumsum(), np.cumprod()</code></td>
+                        <td>Cumulative sum and product</td>
+                    </tr>
+                </table>
+                
+                <div class="example-box">
+                    <h4>Example: Statistical Analysis</h4>
+                    <div class="code-container">
+                        <div class="code-label">Python Code</div>
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+data = np.array([<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>])
+
+<span class="function">print</span>(<span class="string">"Mean:"</span>, np.mean(data))        <span class="comment"># 30.0</span>
+<span class="function">print</span>(<span class="string">"Median:"</span>, np.median(data))    <span class="comment"># 30.0</span>
+<span class="function">print</span>(<span class="string">"Std Dev:"</span>, np.std(data))      <span class="comment"># 14.142...</span>
+<span class="function">print</span>(<span class="string">"Variance:"</span>, np.var(data))      <span class="comment"># 200.0</span>
+<span class="function">print</span>(<span class="string">"Min/Max:"</span>, np.min(data), np.max(data))  <span class="comment"># 10 50</span>
+                        <div class="output-label">Output:</div>
+                        <div class="output">Mean: 30.0
+Median: 30.0
+Std Dev: 14.142135623730951
+Variance: 200.0
+Min/Max: 10 50</div>
+                    </div>
+                </div>
+                
+                <div class="interactive-demo">
+                    <h4>🎮 Interactive Demo: Statistics Calculator</h4>
+                    <p>Enter numbers separated by commas:</p>
+                    <input type="text" id="statsInput" placeholder="e.g., 10,20,30,40,50" value="10,20,30,40,50">
+                    <button onclick="calculateStats()">Calculate</button>
+                    <div class="demo-output" id="statsOutput"></div>
+                </div>
+                
+                <h3>8.1 Statistics Along Axes (2D)</h3>
+                
+                <div class="code-container">
+                    <div class="code-label">Python Code</div>
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+arr = np.array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],
+                [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])
+
+<span class="function">print</span>(<span class="string">"Mean of all:"</span>, np.mean(arr))        <span class="comment"># 3.5</span>
+<span class="function">print</span>(<span class="string">"Mean axis 0 (columns):"</span>, np.mean(arr, axis=<span class="number">0</span>))  <span class="comment"># [2.5 3.5 4.5]</span>
+<span class="function">print</span>(<span class="string">"Mean axis 1 (rows):"</span>, np.mean(arr, axis=<span class="number">1</span>))    <span class="comment"># [2. 5.]</span>
+                </div>
+            </div>
+            
+            <!-- Bonus Section: Tips and Tricks -->
+            <div class="section">
+                <h2>💎 Bonus: Tips and Tricks</h2>
+                
+                <h3>Useful NumPy Patterns</h3>
+                
+                <div class="code-container">
+                    <div class="code-label">Python Code: Useful Patterns</div>
+<span class="comment"># 1. Check array properties</span>
+arr.shape        <span class="comment"># Shape of array</span>
+arr.dtype        <span class="comment"># Data type</span>
+arr.size         <span class="comment"># Total number of elements</span>
+arr.ndim         <span class="comment"># Number of dimensions</span>
+
+<span class="comment"># 2. Create specific arrays</span>
+np.full((<span class="number">3</span>, <span class="number">3</span>), <span class="number">7</span>)      <span class="comment"># Array filled with 7</span>
+np.eye(<span class="number">3</span>)              <span class="comment"># Identity matrix</span>
+np.diag([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])     <span class="comment"># Diagonal matrix</span>
+
+<span class="comment"># 3. Sorting and searching</span>
+np.sort(arr)             <span class="comment"># Sort array</span>
+np.argsort(arr)          <span class="comment"># Indices that would sort array</span>
+np.where(arr > <span class="number">5</span>)       <span class="comment"># Indices where condition is true</span>
+
+<span class="comment"># 4. Stack arrays</span>
+np.vstack([arr1, arr2])  <span class="comment"># Stack vertically</span>
+np.hstack([arr1, arr2])  <span class="comment"># Stack horizontally</span>
+
+<span class="comment"># 5. Mathematical operations</span>
+np.dot(A, B)             <span class="comment"># Matrix multiplication</span>
+np.cross(v1, v2)         <span class="comment"># Cross product</span>
+np.linalg.inv(A)         <span class="comment"># Matrix inverse</span>
+                </div>
+                
+                <div class="note">
+                    <strong>🚀 Performance Tip:</strong> NumPy operations are vectorized and run in compiled C code. Avoid Python loops when possible! Instead of looping through array elements, use NumPy's built-in functions which are much faster.
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>📚 NumPy Interactive Guide | Learn Numerical Computing with Python</p>
+            <p>Last updated: 2024 | For more info visit: <a href="https://numpy.org" style="color: #667eea;">numpy.org</a></p>
+        </footer>
+    </div>
+    
+    <div class="copy-feedback" id="copyFeedback">✓ Copied to clipboard!</div>
+    
+    <script>
+        // Interactive Demo: Create Arrays
+        function demoCreateArray() {
+            const type = document.getElementById('arrayType').value;
+            let explanation = '';
+            
+            switch(type) {
+                case 'zeros':
+                    explanation = `# Create array of zeros
+arr = np.zeros(5)
+Result: [0. 0. 0. 0. 0.]
+
+# 2D zeros
+arr_2d = np.zeros((3, 3))`;
+                    break;
+                case 'ones':
+                    explanation = `# Create array of ones
+arr = np.ones(5)
+Result: [1. 1. 1. 1. 1.]
+
+# 2D ones
+arr_2d = np.ones((3, 3))`;
+                    break;
+                case 'arange':
+                    explanation = `# Create range array
+arr = np.arange(0, 10, 2)
+Result: [0 2 4 6 8]
+
+# With step
+arr = np.arange(0, 10)
+Result: [0 1 2 3 4 5 6 7 8 9]`;
+                    break;
+                case 'linspace':
+                    explanation = `# Create linearly spaced values
+arr = np.linspace(0, 10, 5)
+Result: [ 0.  2.5  5.   7.5 10. ]
+
+# Useful for plotting
+x = np.linspace(0, 2*np.pi, 100)`;
+                    break;
+            }
+            
+            document.getElementById('arrayOutput').textContent = explanation;
+        }
+        
+        // Initialize demo
+        demoCreateArray();
+        
+        // Interactive Demo: Statistics Calculator
+        function calculateStats() {
+            const input = document.getElementById('statsInput').value;
+            const numbers = input.split(',').map(x => parseFloat(x.trim())).filter(x => !isNaN(x));
+            
+            if (numbers.length === 0) {
+                document.getElementById('statsOutput').textContent = 'Please enter valid numbers!';
+                return;
+            }
+            
+            const sum = numbers.reduce((a, b) => a + b, 0);
+            const mean = sum / numbers.length;
+            
+            const sortedNumbers = [...numbers].sort((a, b) => a - b);
+            const median = numbers.length % 2 === 0 
+                ? (sortedNumbers[numbers.length/2 - 1] + sortedNumbers[numbers.length/2]) / 2
+                : sortedNumbers[Math.floor(numbers.length/2)];
+            
+            const variance = numbers.reduce((sum, x) => sum + Math.pow(x - mean, 2), 0) / numbers.length;
+            const stdDev = Math.sqrt(variance);
+            
+            const min = Math.min(...numbers);
+            const max = Math.max(...numbers);
+            
+            const output = `Array: [${numbers.join(', ')}]
+
+Statistics:
+  Mean: ${mean.toFixed(4)}
+  Median: ${median.toFixed(4)}
+  Std Dev: ${stdDev.toFixed(4)}
+  Variance: ${variance.toFixed(4)}
+  Min: ${min}
+  Max: ${max}
+  Sum: ${sum}
+  Count: ${numbers.length}`;
+            
+            document.getElementById('statsOutput').textContent = output;
+        }
+        
+        // Copy to clipboard functionality
+        document.querySelectorAll('.code-container').forEach(container => {
+            const button = document.createElement('button');
+            button.className = 'copy-btn';
+            button.textContent = 'Copy Code';
+            button.onclick = function() {
+                const code = this.parentElement.innerText.replace(/^Copy Code\n/, '');
+                navigator.clipboard.writeText(code);
+                showCopyFeedback();
+            };
+            container.insertBefore(button, container.firstChild);
+        });
+        
+        function showCopyFeedback() {
+            const feedback = document.getElementById('copyFeedback');
+            feedback.style.display = 'block';
+            setTimeout(() => {
+                feedback.style.display = 'none';
+            }, 2000);
+        }
+        
+        // Smooth scroll for TOC links
+        document.querySelectorAll('.toc a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
